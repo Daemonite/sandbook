@@ -1,0 +1,83 @@
+.row.heading > div {
+	font-weight:bold;
+}
+
+/* custom alert icons */
+.more-info {
+	float: right;
+	font-size: 21px;
+	font-weight: bold;
+	line-height: 1;
+	color: #000;
+	text-shadow: 0 1px 0 #fff;
+	filter: alpha(opacity=20);
+	opacity: .2;
+	margin-right:10px;
+}
+.alert-dismissable .more-info {
+	position: relative;
+	top: -2px;
+	right: -21px;
+	color: inherit;
+}
+.more-info:hover,
+.more-info:focus {
+	color: #000066;
+	text-decoration: none;
+	cursor: pointer;
+	filter: alpha(opacity=50);
+	opacity: .5;
+}
+
+/* json highlighting */
+.alert .fa-info-circle {
+	cursor:pointer;
+}
+#results .alert, .results .alert {
+	border-color: -moz-use-text-color;
+	border-style: none solid;
+	border-width: 0 1px;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding: 4px 8px;
+}
+#results .alert:first-child, .results .alert:first-child {
+	border-top: 1px solid;
+}
+#results .alert:last-child, .results .alert:last-child {
+	border-bottom: 1px solid;
+}
+.alert .fa-info, .alert .fa-info-circle {
+	cursor:pointer;
+}
+.alert .info {
+	display:none;
+}
+.json .key {
+	color:#a020f0;
+}
+.json .number {
+	color:#ff0000;
+}
+.json .string {
+	color:#000000;
+}
+.json .boolean {
+	color:#ffa500;
+}
+.json .null {
+	color:#0000ff;
+}
+
+/* pie timer */
+#timer {
+	width:38px;
+	height:38px;
+	margin-left:5px;
+}
+
+/* links */
+.action-link {
+	margin-left:10px;
+	cursor:pointer;
+}
