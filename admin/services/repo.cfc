@@ -76,6 +76,10 @@ component {
 
             	data = deserializeJSON(cfhttp.filecontent.toString());
 
+                if (isStruct(data) AND structKeyExists(data, "message")) {
+                    throw(type="repo",message="#data.message# [#arguments.repo.repo#]", detail=cfhttp.filecontent);                    
+                }
+
             	for (var i=1; i<=arraylen(data); i++){
             		if (isVisible(arguments.repo,data[i].ref)){
             			if (refindnocase("^refs/heads/.*$",data[i].ref))
