@@ -121,13 +121,16 @@ component {
 				  :arguments,
 				  :locks,
 				  :status);
-				SELECT LAST_INSERT_ID() as newID;
 			");
 			q.addParam(name="component", value=arguments.component, type="cf_sql_varchar");
 			q.addParam(name="method", value=arguments.method, type="cf_sql_varchar");
 			q.addParam(name="arguments", value=serializeJSON(arguments.args), type="cf_sql_varchar");
 			q.addParam(name="locks", value="," & arguments.locks & ",", type="cf_sql_varchar");
 			q.addParam(name="status", value=arguments.status, type="cf_sql_varchar");
+			qResult = q.execute();
+			q.setSQL("
+				SELECT LAST_INSERT_ID() as newID;
+			");
 			qResult = q.execute().getResult();
 			return qResult.newID;
 		}
