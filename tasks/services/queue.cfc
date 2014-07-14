@@ -213,7 +213,9 @@ component {
 		sql = "
 			UPDATE `queue`
 			SET status=:newstatus
-			WHERE status='queued'
+			WHERE ID = 
+			(SELECT ID 
+			WHERE STATUS='queued'		
 		";
 
 		for (i=1; i<=listlen(locks); i++){
@@ -221,13 +223,17 @@ component {
 			q.addParam(name="lock#i#", value='%,#listgetat(locks,i)#,%', type="cf_sql_varchar");
 		}
 
-		sql &= " ORDER BY id asc LIMIT 1;"
-		sql &= " SELECT * FROM `queue` WHERE status=:newstatus;"
+		sql &= " ORDER BY ID ASC LIMIT 1)";
 
 		q.setSQL(sql);
 		q.addParam(name="newstatus", value='processing@#arguments.processid#:claimed', type="cf_sql_varchar");
-		qResult = q.execute().getResult();
+		qResult = q.execute();
 		
+		sql = " SELECT * FROM `queue` WHERE status=:newstatus";
+		q.setSQL(sql);
+		q.addParam(name="newstatus", value='processing@#arguments.processid#:claimed', type="cf_sql_varchar");
+		qResult = q.execute().getResult();
+
 		if (qResult.recordcount){
 			for (i=1; i<listlen(qResult.columnlist); i++){
 				stResult[listgetat(qResult.columnlist,i)] = qResult[listgetat(qResult.columnlist,i)][1];
